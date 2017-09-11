@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE Safe                 #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 module Data.String.Convert where
 
