@@ -1,5 +1,6 @@
 name:                string-convert
 version:             0.0.0
+synopsis:            simple and easy string converter
 github:              ncaq/string-convert.git
 license:             MIT
 author:              ncaq
