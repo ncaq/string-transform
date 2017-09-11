@@ -1,5 +1,7 @@
 # string-convert
 
+[![Build Status](https://travis-ci.org/ncaq/string-convert.svg?branch=master)](https://travis-ci.org/ncaq/string-convert)
+
 It is
 
 * `Prelude.String`
