@@ -6,6 +6,7 @@ author:              ncaq
 maintainer:          ncaq@ncaq.net
 copyright:           © ncaq
 category:            Text
+ghc-options:         -Wall
 
 extra-source-files:
   - README.md
