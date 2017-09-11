@@ -1,7 +1,7 @@
-name:                string-convert
+name:                string-transform
 version:             0.0.0
-synopsis:            simple and easy string converter
-github:              ncaq/string-convert.git
+synopsis:            simple and easy haskell string transform
+github:              ncaq/string-transform.git
 license:             MIT
 author:              ncaq
 maintainer:          ncaq@ncaq.net
@@ -26,7 +26,7 @@ tests:
     source-dirs: test
     main:        Main.hs
     dependencies:
-      - string-convert
+      - string-transform
       - tasty
       - tasty-hunit
       - tasty-smallcheck

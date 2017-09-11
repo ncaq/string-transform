@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE Safe                 #-}
 {-# LANGUAGE TypeSynonymInstances #-}
-module Data.String.Convert where
+module Data.String.Transform where
 
 import qualified Data.ByteString           as B
 import qualified Data.ByteString.Lazy      as BL

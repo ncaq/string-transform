@@ -1,6 +1,6 @@
-# string-convert
+# string-transform
 
-[![Build Status](https://travis-ci.org/ncaq/string-convert.svg?branch=master)](https://travis-ci.org/ncaq/string-convert)
+[![Build Status](https://travis-ci.org/ncaq/string-transform.svg?branch=master)](https://travis-ci.org/ncaq/string-transform)
 
 It is
 
@@ -10,7 +10,7 @@ It is
 * `Data.Text.Text`
 * `Data.Text.Lazy.Text`
 
-convert wrapper.
+transform wrapper.
 
 It is **simple** and **easy**.
 

@@ -1,6 +1,6 @@
 module Main (main) where
 
-import           Data.String.Convert
+import           Data.String.Transform
 import           Test.Tasty
 import           Test.Tasty.HUnit
 import           Test.Tasty.SmallCheck
