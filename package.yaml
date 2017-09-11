@@ -20,3 +20,13 @@ dependencies:
 
 library:
   source-dirs: src
+
+tests:
+  tasty:
+    source-dirs: test
+    main:        Main.hs
+    dependencies:
+      - string-convert
+      - tasty
+      - tasty-hunit
+      - tasty-smallcheck
