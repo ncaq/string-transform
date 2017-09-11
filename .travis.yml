@@ -1,0 +1,27 @@
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.local
+    - $HOME/.stack
+
+language: c
+
+addons:
+  apt:
+    packages:
+    - libgmp-dev
+
+before_install:
+  - mkdir -p ~/.local/bin
+  - export PATH=$PATH:$HOME/.local/bin
+  - hash stack || travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - stack setup
+
+install:
+  - stack --jobs 2 --no-terminal test --only-dependencies
+  - stack install hlint
+
+script:
+  - hlint src
+  - stack --jobs 2 --no-terminal test
