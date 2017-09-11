@@ -1,7 +1,7 @@
 name:                string-transform
-version:             0.0.0
+version:             0.0.1
 synopsis:            simple and easy haskell string transform
-github:              ncaq/string-transform.git
+github:              ncaq/string-transform
 license:             MIT
 author:              ncaq
 maintainer:          ncaq@ncaq.net
