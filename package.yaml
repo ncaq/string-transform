@@ -1,0 +1,20 @@
+name:                string-convert
+version:             0.0.0
+github:              ncaq/string-convert.git
+license:             MIT
+author:              ncaq
+maintainer:          ncaq@ncaq.net
+copyright:           © ncaq
+category:            Text
+
+extra-source-files:
+  - README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - bytestring
+  - text
+  - utf8-string
+
+library:
+  source-dirs: src
