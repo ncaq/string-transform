@@ -1,6 +1,8 @@
 {-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE IncoherentInstances  #-}
 {-# LANGUAGE Safe                 #-}
 {-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
 module Data.String.Transform where
 
 import qualified Data.ByteString           as B
@@ -30,6 +32,9 @@ instance ToString T.Text where
 instance ToString TL.Text where
     toString = TL.unpack
 
+instance Show a => ToString a where
+    toString = show
+
 class ToByteStringStrict a where
     toByteStringStrict :: a -> B.ByteString
 
@@ -47,6 +52,9 @@ instance ToByteStringStrict T.Text where
 
 instance ToByteStringStrict TL.Text where
     toByteStringStrict = T.encodeUtf8 . TL.toStrict
+
+instance Show a => ToByteStringStrict a where
+    toByteStringStrict = toByteStringStrict . show
 
 class ToByteStringLazy a where
     toByteStringLazy :: a -> BL.ByteString
@@ -66,6 +74,9 @@ instance ToByteStringLazy T.Text where
 instance ToByteStringLazy TL.Text where
     toByteStringLazy = TL.encodeUtf8
 
+instance Show a => ToByteStringLazy a where
+    toByteStringLazy = toByteStringLazy . show
+
 class ToTextStrict a where
     toTextStrict :: a -> T.Text
 
@@ -84,6 +95,9 @@ instance ToTextStrict T.Text where
 instance ToTextStrict TL.Text where
     toTextStrict = TL.toStrict
 
+instance Show a => ToTextStrict a where
+    toTextStrict = toTextStrict . show
+
 class ToTextLazy a where
     toTextLazy :: a -> TL.Text
 
@@ -101,3 +115,6 @@ instance ToTextLazy T.Text where
 
 instance ToTextLazy TL.Text where
     toTextLazy = id
+
+instance Show a => ToTextLazy a where
+    toTextLazy = toTextLazy . show

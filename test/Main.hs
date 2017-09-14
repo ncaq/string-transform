@@ -1,3 +1,4 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module Main (main) where
 
 import           Data.String.Transform
@@ -16,28 +17,25 @@ tests =
 
 smallCheckTest :: [TestTree]
 smallCheckTest =
-    [ testProperty "toByteStringStrict" prop_toByteStringStrict_toString
-    , testProperty "toByteStringLazy" prop_toByteStringLazy_toString
-    , testProperty "toTextStrict" prop_toTextStrict_toString
-    , testProperty "toTextLazy" prop_toTextLazy_toString
+    [ testProperty "s == toString (toByteStringStrict s)"
+        (\(s :: String) -> s == toString (toByteStringStrict s))
+    , testProperty "s == toString (toByteStringLazy s)"
+        (\(s :: String) -> s == toString (toByteStringLazy s))
+    , testProperty "s == toString (toTextStrict s)"
+        (\(s :: String) -> s == toString (toTextStrict s))
+    , testProperty "s == toString (toTextLazy s)"
+        (\(s :: String) -> s == toString (toTextLazy s))
+    , testProperty "a == b ⇔ toByteStringStrict a == toByteStringStrict b"
+        (\(a :: String) (b :: String) ->
+             let p = a == b
+                 q = toByteStringStrict a == toByteStringStrict b
+             in p == q)
     ]
 
 hunitTest :: [TestTree]
 hunitTest =
-    [ testCase "toByteStringStrict 日本語" case_japanese_toByteStrictStrict_toString
+    [ testCase "toString 1" (toString 1 @?= "1")
+    , testCase "toByteStringStrict 1" (toByteStringStrict 1 @?= toByteStringStrict "1")
+    , testCase "toTextStrict 1" (toTextStrict 1 @?= toTextStrict "1")
+    , testCase "toByteStringStrict 日本語" (toString (toByteStringStrict "日本語") @?= "日本語")
     ]
-
-prop_toByteStringStrict_toString :: String -> Bool
-prop_toByteStringStrict_toString string = string == toString (toByteStringStrict string)
-
-prop_toByteStringLazy_toString :: String -> Bool
-prop_toByteStringLazy_toString string = string == toString (toByteStringLazy string)
-
-prop_toTextStrict_toString :: String -> Bool
-prop_toTextStrict_toString string = string == toString (toTextStrict string)
-
-prop_toTextLazy_toString :: String -> Bool
-prop_toTextLazy_toString string = string == toString (toTextLazy string)
-
-case_japanese_toByteStrictStrict_toString :: Assertion
-case_japanese_toByteStrictStrict_toString = toString (toByteStringStrict "日本語") @?= "日本語"
