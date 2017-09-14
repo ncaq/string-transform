@@ -1,6 +1,6 @@
 name:                string-transform
 version:             0.0.1
-synopsis:            simple and easy haskell string transform
+synopsis:            simple and easy haskell string transform wrapper
 github:              ncaq/string-transform
 license:             MIT
 author:              ncaq
