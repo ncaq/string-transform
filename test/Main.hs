@@ -2,6 +2,7 @@
 module Main (main) where
 
 import           Data.String.Transform
+import qualified Data.Text             as T
 import           Test.Tasty
 import           Test.Tasty.HUnit
 import           Test.Tasty.SmallCheck
@@ -38,4 +39,5 @@ hunitTest =
     , testCase "toByteStringStrict 1" (toByteStringStrict 1 @?= toByteStringStrict "1")
     , testCase "toTextStrict 1" (toTextStrict 1 @?= toTextStrict "1")
     , testCase "toByteStringStrict 日本語" (toString (toByteStringStrict "日本語") @?= "日本語")
+    , testCase "toString Text" (toString (T.pack "foo") @?= "foo")
     ]
