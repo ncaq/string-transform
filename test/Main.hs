@@ -35,9 +35,6 @@ smallCheckTest =
 
 hunitTest :: [TestTree]
 hunitTest =
-    [ testCase "toString 1" (toString 1 @?= "1")
-    , testCase "toByteStringStrict 1" (toByteStringStrict 1 @?= toByteStringStrict "1")
-    , testCase "toTextStrict 1" (toTextStrict 1 @?= toTextStrict "1")
-    , testCase "toByteStringStrict 日本語" (toString (toByteStringStrict "日本語") @?= "日本語")
+    [ testCase "toByteStringStrict 日本語" (toString (toByteStringStrict "日本語") @?= "日本語")
     , testCase "toString Text" (toString (T.pack "foo") @?= "foo")
     ]
