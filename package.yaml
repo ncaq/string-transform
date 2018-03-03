@@ -1,5 +1,5 @@
 name:                string-transform
-version:             0.1.1
+version:             1.0.0
 synopsis:            simple and easy haskell string transform wrapper
 github:              ncaq/string-transform
 license:             MIT
