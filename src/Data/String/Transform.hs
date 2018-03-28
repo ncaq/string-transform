@@ -5,6 +5,7 @@ module Data.String.Transform where
 import qualified Data.ByteString           as B
 import qualified Data.ByteString.Lazy      as BL
 import qualified Data.ByteString.Lazy.UTF8 as BLU
+import qualified Data.ByteString.Short     as BS
 import qualified Data.ByteString.UTF8      as BU
 import qualified Data.Text                 as T
 import qualified Data.Text.Encoding        as T
@@ -22,6 +23,9 @@ instance ToString B.ByteString where
 
 instance ToString BL.ByteString where
     toString = BLU.toString
+
+instance ToString BS.ShortByteString where
+    toString = toString . BS.fromShort
 
 instance ToString T.Text where
     toString = T.unpack
@@ -41,11 +45,14 @@ instance ToByteStringStrict B.ByteString where
 instance ToByteStringStrict BL.ByteString where
     toByteStringStrict = BL.toStrict
 
+instance ToByteStringStrict BS.ShortByteString where
+    toByteStringStrict = BS.fromShort
+
 instance ToByteStringStrict T.Text where
     toByteStringStrict = T.encodeUtf8
 
 instance ToByteStringStrict TL.Text where
-    toByteStringStrict = T.encodeUtf8 . TL.toStrict
+    toByteStringStrict = toByteStringStrict . TL.toStrict
 
 class ToByteStringLazy a where
     toByteStringLazy :: a -> BL.ByteString
@@ -59,11 +66,35 @@ instance ToByteStringLazy B.ByteString where
 instance ToByteStringLazy BL.ByteString where
     toByteStringLazy = id
 
+instance ToByteStringLazy BS.ShortByteString where
+    toByteStringLazy = toByteStringLazy . BS.fromShort
+
 instance ToByteStringLazy T.Text where
-    toByteStringLazy = BL.fromStrict . T.encodeUtf8
+    toByteStringLazy = toByteStringLazy . T.encodeUtf8
 
 instance ToByteStringLazy TL.Text where
     toByteStringLazy = TL.encodeUtf8
+
+class ToShortByteString a where
+    toShortByteString :: a -> BS.ShortByteString
+
+instance ToShortByteString String where
+    toShortByteString = toShortByteString . BU.fromString
+
+instance ToShortByteString B.ByteString where
+    toShortByteString = BS.toShort
+
+instance ToShortByteString BL.ByteString where
+    toShortByteString = toShortByteString . toByteStringStrict
+
+instance ToShortByteString BS.ShortByteString where
+    toShortByteString = id
+
+instance ToShortByteString T.Text where
+    toShortByteString = toShortByteString . toByteStringStrict
+
+instance ToShortByteString TL.Text where
+    toShortByteString = toShortByteString . toByteStringStrict
 
 class ToTextStrict a where
     toTextStrict :: a -> T.Text
@@ -75,7 +106,10 @@ instance ToTextStrict B.ByteString where
     toTextStrict = T.decodeUtf8
 
 instance ToTextStrict BL.ByteString where
-    toTextStrict = T.decodeUtf8 . BL.toStrict
+    toTextStrict = toTextStrict . BL.toStrict
+
+instance ToTextStrict BS.ShortByteString where
+    toTextStrict = toTextStrict . BS.fromShort
 
 instance ToTextStrict T.Text where
     toTextStrict = id
@@ -90,10 +124,13 @@ instance ToTextLazy String where
     toTextLazy = TL.pack
 
 instance ToTextLazy B.ByteString where
-    toTextLazy = TL.decodeUtf8 . BL.fromStrict
+    toTextLazy = toTextLazy . BL.fromStrict
 
 instance ToTextLazy BL.ByteString where
     toTextLazy = TL.decodeUtf8
+
+instance ToTextLazy BS.ShortByteString where
+    toTextLazy = toTextLazy . toByteStringLazy
 
 instance ToTextLazy T.Text where
     toTextLazy = TL.fromStrict

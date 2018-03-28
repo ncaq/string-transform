@@ -10,6 +10,7 @@ simple and easy haskell string transform wrapper.
 * `toString`
 * `toByteStringStrict`
 * `toByteStringLazy`
+* `toShortByteString`
 * `toTextStrict`
 * `toTextLazy`
 

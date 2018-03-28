@@ -22,6 +22,8 @@ smallCheckTest =
         (\(s :: String) -> s == toString (toByteStringStrict s))
     , testProperty "s == toString (toByteStringLazy s)"
         (\(s :: String) -> s == toString (toByteStringLazy s))
+    , testProperty "s == toString (toShortByteString s)"
+        (\(s :: String) -> s == toString (toShortByteString s))
     , testProperty "s == toString (toTextStrict s)"
         (\(s :: String) -> s == toString (toTextStrict s))
     , testProperty "s == toString (toTextLazy s)"
