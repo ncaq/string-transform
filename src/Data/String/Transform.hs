@@ -13,127 +13,127 @@ import qualified Data.Text.Lazy            as TL
 import qualified Data.Text.Lazy.Encoding   as TL
 
 class ToString a where
-    toString :: a -> String
+  toString :: a -> String
 
 instance ToString String where
-    toString = id
+  toString = id
 
 instance ToString B.ByteString where
-    toString = BU.toString
+  toString = BU.toString
 
 instance ToString BL.ByteString where
-    toString = BLU.toString
+  toString = BLU.toString
 
 instance ToString BS.ShortByteString where
-    toString = toString . BS.fromShort
+  toString = toString . BS.fromShort
 
 instance ToString T.Text where
-    toString = T.unpack
+  toString = T.unpack
 
 instance ToString TL.Text where
-    toString = TL.unpack
+  toString = TL.unpack
 
 class ToByteStringStrict a where
-    toByteStringStrict :: a -> B.ByteString
+  toByteStringStrict :: a -> B.ByteString
 
 instance ToByteStringStrict String where
-    toByteStringStrict = BU.fromString
+  toByteStringStrict = BU.fromString
 
 instance ToByteStringStrict B.ByteString where
-    toByteStringStrict = id
+  toByteStringStrict = id
 
 instance ToByteStringStrict BL.ByteString where
-    toByteStringStrict = BL.toStrict
+  toByteStringStrict = BL.toStrict
 
 instance ToByteStringStrict BS.ShortByteString where
-    toByteStringStrict = BS.fromShort
+  toByteStringStrict = BS.fromShort
 
 instance ToByteStringStrict T.Text where
-    toByteStringStrict = T.encodeUtf8
+  toByteStringStrict = T.encodeUtf8
 
 instance ToByteStringStrict TL.Text where
-    toByteStringStrict = toByteStringStrict . TL.toStrict
+  toByteStringStrict = toByteStringStrict . TL.toStrict
 
 class ToByteStringLazy a where
-    toByteStringLazy :: a -> BL.ByteString
+  toByteStringLazy :: a -> BL.ByteString
 
 instance ToByteStringLazy String where
-    toByteStringLazy = BLU.fromString
+  toByteStringLazy = BLU.fromString
 
 instance ToByteStringLazy B.ByteString where
-    toByteStringLazy = BL.fromStrict
+  toByteStringLazy = BL.fromStrict
 
 instance ToByteStringLazy BL.ByteString where
-    toByteStringLazy = id
+  toByteStringLazy = id
 
 instance ToByteStringLazy BS.ShortByteString where
-    toByteStringLazy = toByteStringLazy . BS.fromShort
+  toByteStringLazy = toByteStringLazy . BS.fromShort
 
 instance ToByteStringLazy T.Text where
-    toByteStringLazy = toByteStringLazy . T.encodeUtf8
+  toByteStringLazy = toByteStringLazy . T.encodeUtf8
 
 instance ToByteStringLazy TL.Text where
-    toByteStringLazy = TL.encodeUtf8
+  toByteStringLazy = TL.encodeUtf8
 
 class ToShortByteString a where
-    toShortByteString :: a -> BS.ShortByteString
+  toShortByteString :: a -> BS.ShortByteString
 
 instance ToShortByteString String where
-    toShortByteString = toShortByteString . BU.fromString
+  toShortByteString = toShortByteString . BU.fromString
 
 instance ToShortByteString B.ByteString where
-    toShortByteString = BS.toShort
+  toShortByteString = BS.toShort
 
 instance ToShortByteString BL.ByteString where
-    toShortByteString = toShortByteString . toByteStringStrict
+  toShortByteString = toShortByteString . toByteStringStrict
 
 instance ToShortByteString BS.ShortByteString where
-    toShortByteString = id
+  toShortByteString = id
 
 instance ToShortByteString T.Text where
-    toShortByteString = toShortByteString . toByteStringStrict
+  toShortByteString = toShortByteString . toByteStringStrict
 
 instance ToShortByteString TL.Text where
-    toShortByteString = toShortByteString . toByteStringStrict
+  toShortByteString = toShortByteString . toByteStringStrict
 
 class ToTextStrict a where
-    toTextStrict :: a -> T.Text
+  toTextStrict :: a -> T.Text
 
 instance ToTextStrict String where
-    toTextStrict = T.pack
+  toTextStrict = T.pack
 
 instance ToTextStrict B.ByteString where
-    toTextStrict = T.decodeUtf8
+  toTextStrict = T.decodeUtf8
 
 instance ToTextStrict BL.ByteString where
-    toTextStrict = toTextStrict . BL.toStrict
+  toTextStrict = toTextStrict . BL.toStrict
 
 instance ToTextStrict BS.ShortByteString where
-    toTextStrict = toTextStrict . BS.fromShort
+  toTextStrict = toTextStrict . BS.fromShort
 
 instance ToTextStrict T.Text where
-    toTextStrict = id
+  toTextStrict = id
 
 instance ToTextStrict TL.Text where
-    toTextStrict = TL.toStrict
+  toTextStrict = TL.toStrict
 
 class ToTextLazy a where
-    toTextLazy :: a -> TL.Text
+  toTextLazy :: a -> TL.Text
 
 instance ToTextLazy String where
-    toTextLazy = TL.pack
+  toTextLazy = TL.pack
 
 instance ToTextLazy B.ByteString where
-    toTextLazy = toTextLazy . BL.fromStrict
+  toTextLazy = toTextLazy . BL.fromStrict
 
 instance ToTextLazy BL.ByteString where
-    toTextLazy = TL.decodeUtf8
+  toTextLazy = TL.decodeUtf8
 
 instance ToTextLazy BS.ShortByteString where
-    toTextLazy = toTextLazy . toByteStringLazy
+  toTextLazy = toTextLazy . toByteStringLazy
 
 instance ToTextLazy T.Text where
-    toTextLazy = TL.fromStrict
+  toTextLazy = TL.fromStrict
 
 instance ToTextLazy TL.Text where
-    toTextLazy = id
+  toTextLazy = id
