@@ -1,13 +1,13 @@
-name:                string-transform
-version:             1.1.0
-synopsis:            simple and easy haskell string transform wrapper
-github:              ncaq/string-transform
-license:             MIT
-author:              ncaq
-maintainer:          ncaq@ncaq.net
-copyright:           © ncaq
-category:            Text
-ghc-options:         -Wall
+name: string-transform
+version: 1.1.0
+synopsis: simple and easy haskell string transform wrapper
+github: ncaq/string-transform
+license: MIT
+author: ncaq
+maintainer: ncaq@ncaq.net
+copyright: © ncaq
+category: Text
+ghc-options: -Wall
 
 extra-source-files:
   - README.md
@@ -24,7 +24,7 @@ library:
 tests:
   tasty:
     source-dirs: test
-    main:        Main.hs
+    main: Main.hs
     dependencies:
       - string-transform
       - tasty
